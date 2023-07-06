@@ -455,7 +455,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
             ),
             // google login button
             AnimatedPositioned(
-              duration: Duration(milliseconds: 500),,
+              duration: Duration(milliseconds: 500),
               curve: Curves.easeIn,
               top: isSignupScreen
                   ? MediaQuery.of(context).size.height - 125
