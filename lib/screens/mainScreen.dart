@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:chatting/config/palette.dart';
 import 'package:chatting/screens/chatScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   const LoginSignupScreen({super.key});
@@ -453,13 +454,21 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             password: userPassword,
                           );
 
+                          await FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(newUser.user!.uid)
+                              .set({
+                            'userName': userName,
+                            'email': userEmail,
+                          });
+
                           if (newUser.user != null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return ChatScreen();
-                              }),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) {
+                            //     return ChatScreen();
+                            //   }),
+                            // );
                             setState(() {
                               showSpinner = false;
                             });
